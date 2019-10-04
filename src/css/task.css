@@ -1,4 +1,11 @@
 .task {
   border: 1px solid rgb(0, 0, 0);
   padding: 20px;
+  margin-bottom: 10px;
+}
+.todo {
+  background-color: transparent;
+}
+.done {
+  background-color: green;
 }

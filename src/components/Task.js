@@ -1,12 +1,47 @@
 import React from 'react';
 import '../css/task.css';
-const classnames = require('classnames');
 
-const Task = ({ title }) => {
+const Task = ({
+  title,
+  taskState,
+  taskIndex,
+  onChange,
+  onDelete,
+  drop,
+  allowDrop,
+  drag,
+}) => {
+  const classState = 'task ' + taskState;
+  const buttonMarkText = taskState === 'todo' ? 'Done' : 'Todo';
   return (
-    <div className="task">
-      <div>{title}</div>
-      <div></div>
+    <div
+      draggable="true"
+      onDrop={(event) => {
+        drop(event, taskIndex);
+      }}
+      onDragOver={(event) => {
+        allowDrop(event);
+      }}
+      onDragStart={(event) => {
+        drag(event, taskIndex);
+      }}
+      className={classState}
+    >
+      <div>
+        {taskIndex} - {title}
+      </div>
+      <div>
+        <button
+          onClick={() => {
+            onDelete(taskIndex);
+          }}
+        >
+          Delete Task
+        </button>
+        <button onClick={() => onChange(taskIndex)}>
+          Marc as {buttonMarkText}
+        </button>
+      </div>
     </div>
   );
 };
